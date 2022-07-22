@@ -1,0 +1,7 @@
+## **코랩에서 빈폴더가 아닌 폴더 삭제하기**
+
+~~~
+import shutil
+shutil.rmtree('/content/drive/MyDrive/ddupy_project')
+~~~
+
