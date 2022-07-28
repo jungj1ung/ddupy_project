@@ -19,7 +19,7 @@ from PIL import Image
 from efficientnet_pytorch import EfficientNet
 
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-hyper_param_batch = 6
+hyper_param_batch = 1   #원래 6이었음
 
 random_seed = 100
 random.seed(random_seed)
@@ -32,9 +32,9 @@ train_name = 'model5'
 
 PATH = './scalp_weights/'
 
-data_train_path = './train_data/'+train_name+'/train'
-data_validation_path = './train_data/'+train_name+'/validation'
-data_test_path = './train_data/'+train_name+'/test'
+data_train_path = '/content/drive/MyDrive/ddupy_project/data/train'        #'./train_data/'+train_name+'/train'
+data_validation_path = '/content/drive/MyDrive/ddupy_project/data/validation' #'./train_data/'+train_name+'/validation'
+#data_test_path = '/content/drive/MyDrive/ddupy_project/data/train'  #'./train_data/'+train_name+'/test'
 
 image_size = EfficientNet.get_image_size(model_name)
 print(image_size)
@@ -175,7 +175,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer_ft = optim.Adam(model.parameters(),lr = 1e-4)
 exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
-num_epochs = 1000
+num_epochs = 1
 train_model(model, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=num_epochs)
 
 
