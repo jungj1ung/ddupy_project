@@ -25,9 +25,11 @@ random_seed = 100
 random.seed(random_seed)
 torch.manual_seed(random_seed)
 
+#증상을 0~3으로 4개의 클래스로 구별할 거니까 num_classes =4
 num_classes = 4
 model_name = 'efficientnet-b7'
 
+#학습한 모델 저장할 때 쓸 변수
 train_name = 'model5'
 
 PATH = './scalp_weights/'
@@ -39,11 +41,13 @@ data_validation_path = '/content/drive/MyDrive/ddupy_project/data/validation' #'
 image_size = EfficientNet.get_image_size(model_name)
 print(image_size)
 
+#사전학습된 모델 사용(전이학습)
 model = EfficientNet.from_pretrained(model_name, num_classes=num_classes)
 model = model.to(device)
 
 transforms_train = transforms.Compose([
                                         transforms.Resize([int(600), int(600)], interpolation=4),
+                                        #transforms.RandomHorizontalFlip이랑 verticalflip은 주어진 확률에 따라 이미지를 좌우나 상하로 변경하는 메서드
                                         transforms.RandomHorizontalFlip(p=0.5),
                                         transforms.RandomVerticalFlip(p=0.5),
                                         transforms.Lambda(lambda x: x.rotate(90)),
@@ -59,7 +63,7 @@ transforms_val = transforms.Compose([
                                         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
                                       ])
 
-
+#데이터 읽어올건데 읽어오면서 레이블링 동시에 하는 메서드
 train_data_set = datasets.ImageFolder(data_train_path, transform=transforms_train)
 val_data_set = datasets.ImageFolder(data_validation_path, transform=transforms_val)
 
@@ -173,6 +177,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 criterion = nn.CrossEntropyLoss()
 
 optimizer_ft = optim.Adam(model.parameters(),lr = 1e-4)
+#위에 옵티마이저에 대해 7회 epoch마다 학습률에 0.1을 곱한다.
 exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
 num_epochs = 1
