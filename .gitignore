@@ -1,0 +1,3 @@
+ddupy_server/.idea/*
+ddupy_server/venv/*
+ddupy_server/__pycache__/*
