@@ -1,7 +1,0 @@
-model1_train.py : �̼����� �� �н�
-model2_train.py : �������� �� �н�
-model3_train.py : �𳶻���ȫ�� �� �н�
-model4_train.py : ��ȫ�ݳ��� �� �н�
-model5_train.py : ��� �𵨿� �� �н�
-model6_train.py : Ż�� �𵨿� �� �н�
-�ҽ� ���� ������ ���� ��ġ�� ���� �н� ���� �ؾ��մϴ�
